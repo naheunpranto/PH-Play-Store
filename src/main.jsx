@@ -4,6 +4,10 @@ import './index.css'
 import { RouterProvider } from 'react-router/dom'
 import { createBrowserRouter } from 'react-router'
 import RootLayout from './layout/RootLayout'
+import Apps from './pages/apps/Apps'
+import InstallApps from './pages/installApps/InstallApps'
+import Homepage from './pages/homepage/Homepage'
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage'
 
 const router = createBrowserRouter(
   [
@@ -13,14 +17,18 @@ const router = createBrowserRouter(
       children: [
         {
           path: "/",
-          element: <h2>Homepage</h2>
+          Component: Homepage
         },
         {
           path: "/apps",
-          element: <h2>Apps</h2>
+          Component: Apps
+        },
+        {
+          path: "/installApps",
+          Component: InstallApps
         },
       ],
-      errorElement: <h2>This page is not found</h2>
+      errorElement: <NotFoundPage></NotFoundPage>
     },
   ]
 )
