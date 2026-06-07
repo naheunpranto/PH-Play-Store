@@ -1,10 +1,16 @@
+import Banner from "../../components/Banner";
+import Stats from "../../components/Stats";
+import TrandingApps from "../../components/TrandingApps";
+
  
 
 const Homepage = () => {
     return (
-        <div>
-            Homepage
-        </div>
+        <>
+            <Banner></Banner>
+            <Stats/>
+            <TrandingApps/>
+        </>
     );
 };
 
