@@ -1,5 +1,7 @@
 import { use, useEffect, useState } from "react";
 import AppCard from "./AppCard";
+import { Link } from "react-router";
+import useAppsHooks from "../hooks/useAppsHooks";
 // import { useLoaderData } from "react-router";
 
 // const appsPromise = fetch("/data.json").then(res => res.json());
@@ -11,19 +13,7 @@ const TrandingApps = () => {
   // const data = useLoaderData();
   // console.log(data, "data from homepage");
 
-  const [apps, setApps] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("/data.json");
-      const data = await res.json();
-      console.log(data);
-      setApps(data);
-    };
-    fetchData();
-  }, []);
-
-  console.log(apps, "apps");
+  const {apps, loading} = useAppsHooks();
 
   return (
     <div className="container mx-auto my-[60px]">
@@ -36,12 +26,20 @@ const TrandingApps = () => {
         </p>
       </div>
       Total apps: {apps.length}
-      <div className="grid grid-cols-3 gap-5">
-        {apps.map((app, ind) => {
-          return (
-            <AppCard key={ind} app = {app}/>
-          );
-        })}
+      {loading ? (
+        <h2>Loading...</h2>
+      ) : (
+        <div className="grid grid-cols-4 gap-5">
+          {apps.slice(0, 8).map((app, ind) => {
+            return <AppCard key={ind} app={app} />;
+          })}
+        </div>
+      )}
+      
+      <div className="text-center mt-4">
+        <Link to={"/apps"}>
+          <button className="btn bg-purple-500 text-white">View All</button>
+        </Link>
       </div>
     </div>
   );
